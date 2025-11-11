@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voucher Khuyến Mãi - Guardian Vietnam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* (Giữ nguyên toàn bộ CSS của bạn) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            padding-top: 104px; 
+        }
+        .bg-guardian-orange {
+            background-color: #f07f24;
+        }
+        .text-guardian-orange {
+            color: #f07f24;
+        }
+        .border-guardian-orange {
+            border-color: #f07f24;
+        }
+         .text-guardian-green {
+            color: #00a850;
+        }
+        .hero-shape {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 450px; 
+            height: 350px; 
+            background-color: #f07f24;
+            border-bottom-left-radius: 9999px; 
+            z-index: 1;
+            @media (max-width: 768px) {
+                width: 300px;
+                height: 250px;
+                right: -50px;
+                top: -50px;
+            }
+        }
+        .voucher-card {
+            background-color: #ff8c4a; 
+            color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(240, 127, 36, 0.4), 0 4px 6px -2px rgba(240, 127, 36, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .voucher-card:hover {
+            transform: translateY(-4px);
+        }
+        /* Gradient cho khu vực thương hiệu */
+        .bg-gradient-brand {
+            background: linear-gradient(180deg, #f7f7f7 0%, #ffc09f 100%);
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'guardian-orange': '#f07f24',
+                        'guardian-green': '#00a850',
+                        'flash-red': '#dc2626',
+                        'voucher-light-orange': '#ff8c4a',
+                        'voucher-dark-orange': '#f07f24',
+                        'brand-pink': '#e91e63',
+                        'brand-green': '#4caf50',
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 right-0 z-50 shadow-md">
+        <div class="bg-gray-800 text-white text-xs font-medium py-1.5 px-4 flex justify-end">
+            <a href="#" class="text-guardian-orange transition">Voucher</a>
+            <span class="mx-3 text-gray-500">|</span>
+            <a href="../Về chúng tôi/index.html" class="hover:text-guardian-orange transition">Về chúng tôi</a>
+        </div>
+
+        <nav class="bg-white p-4 flex justify-between items-center h-20">
+            <div class="text-2xl font-black text-guardian-orange uppercase tracking-wider">
+                <span class="text-guardian-green">G</span>UARDIAN
+            </div>
+            
+            <div class="hidden md:flex space-x-8 text-sm font-semibold">
+                <a href="../Trang chủ/index.html" class="text-gray-600 hover:text-guardian-orange transition pb-1">Trang chủ</a>
+                <a href="#" class="text-guardian-orange border-b-2 border-guardian-orange font-bold pb-1">Voucher</a>
+                <a href="../Về chúng tôi/index.html" class="text-gray-600 hover:text-guardian-orange transition pb-1">Về chúng tôi</a>
+            </div>
+
+            <div id="auth-buttons" class="flex items-center space-x-3 text-sm">
+                </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-8 py-8">
+
+        <div class="relative bg-white rounded-2xl shadow-lg overflow-hidden mb-8 p-6 md:p-12">
+            
+            <div class="hero-shape"></div>
+
+            <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4 pr-10 uppercase text-guardian-orange">
+                        Ngày Hội Voucher
+                    </h1>
+                    <p class="text-sm md:text-base text-gray-600 mb-6">
+                        Tổng hợp hàng ngàn ưu đãi và voucher hấp dẫn nhất, giúp bạn mua sắm thả ga các sản phẩm sức khỏe và làm đẹp chất lượng.
+                    </p>
+                </div>
+
+                <div class="relative flex justify-center md:justify-end">
+                    <div class="absolute right-0 top-1/2 -translate-y-1/2 text-right z-20">
+                        <p class="text-[3rem] md:text-[5rem] font-black text-white opacity-90 leading-none">guardian</p>
+                        <p class="text-xl md:text-3xl font-bold text-white opacity-90 mt-1">healthy beauty</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="relative bg-voucher-light-orange bg-opacity-80 p-6 md:p-12 rounded-2xl shadow-xl mb-12 overflow-hidden border border-orange-400">
+            <div class="absolute top-0 right-0 w-full h-full opacity-30" style="background-image: url('https://placehold.co/800x400/fff3e8/f07f24?text=VOUCHER+BACKGROUND'); background-size: cover;"></div>
+            <div class="absolute top-1/4 left-0 w-20 h-20 bg-white rounded-full opacity-50 blur-xl"></div>
+            <div class="absolute bottom-1/4 right-0 w-16 h-16 bg-white rounded-full opacity-50 blur-xl"></div>
+            
+            <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <span class="text-sm font-bold bg-white text-guardian-orange px-3 py-1 rounded-full mb-3 inline-block shadow-md">100 Trăm Voucher</span>
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-2">
+                        SĂN DEAL LUYỆN GIỰT VOUCHER SIÊU XỊN
+                    </h2>
+                    <p class="text-lg font-bold text-white mb-4">Lên đến 1 triệu đồng</p>
+                </div>
+                <div class="hidden md:flex justify-end">
+                    <img src="https://placehold.co/300x200/ff7e00/ffffff?text=Voucher+Machine" alt="Máy in Voucher" class="w-full max-w-sm rounded-lg shadow-2xl transform rotate-3 scale-105">
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-12">
+            
+            <div class="voucher-card p-4 flex flex-col justify-between">
+                <div class="text-center">
+                    <p class="text-4xl font-extrabold mb-1">12%</p>
+                    <p class="text-xs font-semibold uppercase opacity-90">Voucher</p>
+                </div>
+                <div class="border-t border-dashed border-white border-opacity-50 pt-3 mt-3 text-center text-xs">
+                    <p class="font-semibold mb-1">Đơn từ 400K. Giảm tối đa 48K</p>
+                    <p class="opacity-80">Áp dụng 20.08 - 25.08</p>
+                    <button class="w-full bg-white text-guardian-orange font-bold py-2 rounded-full mt-3 hover:bg-gray-100 transition">
+                        MUA NGAY
+                    </button>
+                </div>
+            </div>
+
+            <div class="voucher-card p-4 flex flex-col justify-between">
+                <div class="text-center">
+                    <p class="text-4xl font-extrabold mb-1">60K</p>
+                    <p class="text-xs font-semibold uppercase opacity-90">Voucher</p>
+                </div>
+                <div class="border-t border-dashed border-white border-opacity-50 pt-3 mt-3 text-center text-xs">
+                    <p class="font-semibold mb-1">Đơn từ 450K</p>
+                    <p class="opacity-80">Áp dụng 20.08 - 25.08</p>
+                    <button class="w-full bg-white text-guardian-orange font-bold py-2 rounded-full mt-3 hover:bg-gray-100 transition">
+                        MUA NGAY
+                    </button>
+                </div>
+            </div>
+            
+            <div class="voucher-card p-4 flex flex-col justify-between col-span-2 md:col-span-1">
+                <div class="text-center">
+                    <p class="text-4xl font-extrabold mb-1">15K</p>
+                    <p class="text-xs font-semibold uppercase opacity-90">Voucher</p>
+                </div>
+                <div class="border-t border-dashed border-white border-opacity-50 pt-3 mt-3 text-center text-xs">
+                    <p class="font-semibold mb-1">Flash Sale 0H - 12H. Duy nhất 15.06</p>
+                    <p class="opacity-80">Đơn từ 350K</p>
+                    <button class="w-full bg-white text-guardian-orange font-bold py-2 rounded-full mt-3 hover:bg-gray-100 transition">
+                        MUA NGAY
+                    </button>
+                </div>
+            </div>
+
+            <div class="voucher-card p-4 flex flex-col justify-between col-span-2 md:col-span-1">
+                <div class="text-center">
+                    <p class="text-4xl font-extrabold mb-1">25K</p>
+                    <p class="text-xs font-semibold uppercase opacity-90">Voucher</p>
+                </div>
+                <div class="border-t border-dashed border-white border-opacity-50 pt-3 mt-3 text-center text-xs">
+                    <p class="font-semibold mb-1">Flash Sale 12H - 24H. Duy nhất 15.06</p>
+                    <p class="opacity-80">Đơn từ 500K</p>
+                    <button class="w-full bg-white text-guardian-orange font-bold py-2 rounded-full mt-3 hover:bg-gray-100 transition">
+                        MUA NGAY
+                    </button>
+                </div>
+            </div>
+
+            <div class="voucher-card p-4">
+                <div class="text-center"><p class="text-3xl font-extrabold mb-1">15K</p><p class="text-xs font-semibold uppercase opacity-90">Voucher</p></div>
+                <div class="border-t border-dashed border-white border-opacity-50 pt-2 mt-2 text-center text-[10px]">
+                    <p class="font-semibold mb-1">Đơn từ 350K. Áp dụng 25.06 - 27.06</p>
+                    <button class="w-full bg-white text-guardian-orange font-bold py-1.5 rounded-full mt-2">MUA NGAY</button>
+                </div>
+            </div>
+            <div class="voucher-card p-4">
+                <div class="text-center"><p class="text-3xl font-extrabold mb-1">50K</p><p class="text-xs font-semibold uppercase opacity-90">Voucher</p></div>
+                <div class="border-t border-dashed border-white border-opacity-50 pt-2 mt-2 text-center text-[10px]">
+                    <p class="font-semibold mb-1">Đơn từ 500K. Áp dụng 25.06 - 27.06</p>
+                    <button class="w-full bg-white text-guardian-orange font-bold py-1.5 rounded-full mt-2">MUA NGAY</button>
+                </div>
+            </div>
+            <div class="voucher-card p-4">
+                <div class="text-center"><p class="text-3xl font-extrabold mb-1">20K</p><p class="text-xs font-semibold uppercase opacity-90">Voucher</p></div>
+                <div class="border-t border-dashed border-white border-opacity-50 pt-2 mt-2 text-center text-[10px]">
+                    <p class="font-semibold mb-1">Đơn từ 350K. Áp dụng 28.06 - 02.07</p>
+                    <button class="w-full bg-white text-guardian-orange font-bold py-1.5 rounded-full mt-2">MUA NGAY</button>
+                </div>
+            </div>
+            <div class="voucher-card p-4">
+                <div class="text-center"><p class="text-3xl font-extrabold mb-1">20K</p><p class="text-xs font-semibold uppercase opacity-90">Voucher</p></div>
+                <div class="border-t border-dashed border-white border-opacity-50 pt-2 mt-2 text-center text-[10px]">
+                    <p class="font-semibold mb-1">Đơn từ 350K. Áp dụng 28.06 - 02.07</p>
+                    <button class="w-full bg-white text-guardian-orange font-bold py-1.5 rounded-full mt-2">MUA NGAY</button>
+                </div>
+            </div>
+             <div class="voucher-card p-4">
+                <div class="text-center"><p class="text-3xl font-extrabold mb-1">15K</p><p class="text-xs font-semibold uppercase opacity-90">Voucher</p></div>
+                <div class="border-t border-dashed border-white border-opacity-50 pt-2 mt-2 text-center text-[10px]">
+                    <p class="font-semibold mb-1">Đơn từ 350K. Áp dụng 03.07 - 07.07</p>
+                    <button class="w-full bg-white text-guardian-orange font-bold py-1.5 rounded-full mt-2">MUA NGAY</button>
+                </div>
+            </div>
+            <div class="voucher-card p-4">
+                <div class="text-center"><p class="text-3xl font-extrabold mb-1">50K</p><p class="text-xs font-semibold uppercase opacity-90">Voucher</p></div>
+                <div class="border-t border-dashed border-white border-opacity-50 pt-2 mt-2 text-center text-[10px]">
+                    <p class="font-semibold mb-1">Đơn từ 500K. Áp dụng 03.07 - 07.07</p>
+                    <button class="w-full bg-white text-guardian-orange font-bold py-1.5 rounded-full mt-2">MUA NGAY</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gradient-brand p-6 md:p-12 rounded-2xl shadow-xl mb-12 border border-gray-100">
+            <div class="grid md:grid-cols-3 gap-8 items-center">
+                <div class="md:col-span-1 relative">
+                    <p class="text-sm font-bold text-guardian-orange uppercase mb-2">HOT DEAL</p>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 leading-tight mb-4">
+                        Hàng trăm <span class="text-guardian-orange">Thương hiệu Nổi Bật</span>
+                    </h2>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:relative md:top-0 md:left-0 md:transform-none mt-4 md:mt-0">
+                        <img src="https://placehold.co/250x150/ff7e00/ffffff?text=VOUCHER+CARD" alt="Voucher 50k" class="rounded-lg shadow-2xl rotate-3">
+                    </div>
+                </div>
+
+                <div class="md:col-span-2 grid grid-cols-2 gap-4">
+                    
+                    <div class="bg-white p-4 rounded-xl shadow-lg border-t-4 border-brand-pink">
+                        <p class="text-sm font-bold text-gray-700 mb-2">GARNIER, L'ORÉAL</p>
+                        <div class="flex space-x-2 mb-3">
+                            <span class="text-xs font-semibold bg-gray-100 text-gray-600 px-2 py-0.5 rounded">VOUCHER 30K</span>
+                            <span class="text-xs font-semibold bg-gray-100 text-gray-600 px-2 py-0.5 rounded">VOUCHER 10%</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-center font-bold">
+                            <div class="p-2 border border-gray-200 rounded-lg">ĐƠN TỪ 300K</div>
+                            <div class="p-2 border border-gray-200 rounded-lg">25.05 - 24.06</div>
+                            <button class="col-span-2 bg-brand-pink text-white py-2 rounded-full hover:bg-opacity-90 transition">MUA NGAY</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl shadow-lg border-t-4 border-brand-green">
+                        <p class="text-sm font-bold text-gray-700 mb-2">BIO ESSENCE</p>
+                        <div class="flex space-x-2 mb-3">
+                            <span class="text-xs font-semibold bg-gray-100 text-gray-600 px-2 py-0.5 rounded">VOUCHER 70K</span>
+                            <span class="text-xs font-semibold bg-gray-100 text-gray-600 px-2 py-0.5 rounded">VOUCHER 20%</span>
+                        </div>
+                         <div class="grid grid-cols-2 gap-2 text-xs text-center font-bold">
+                            <div class="p-2 border border-gray-200 rounded-lg">ĐƠN TỪ 299K</div>
+                            <div class="p-2 border border-gray-200 rounded-lg">28.05 - 24.06</div>
+                            <button class="col-span-2 bg-brand-green text-white py-2 rounded-full hover:bg-opacity-90 transition">MUA NGAY</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer class="bg-white p-8 md:p-12 border-t border-gray-200">
+       </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // ----- SCRIPT 1: KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP CHO HEADER -----
+            const authButtonsContainer = document.getElementById('auth-buttons');
+            const token = localStorage.getItem('token'); // Lấy "vé" (token)
+            
+            if (token) {
+                fetchUserInfo(token);
+            } else {
+                showLoggedOutButtons();
+            }
+
+            async function fetchUserInfo(token) {
+                try {
+                    const response = await fetch('http://localhost:5000/api/user/me', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-auth-token': token 
+                        }
+                    });
+
+                    if (response.ok) {
+                        const user = await response.json();
+                        showLoggedInButtons(user.full_name);
+                    } else {
+                        localStorage.removeItem('token'); 
+                        showLoggedOutButtons();
+                    }
+                } catch (error) {
+                    console.error('Lỗi kết nối:', error);
+                    showLoggedOutButtons(); 
+                }
+            }
+
+            function showLoggedOutButtons() {
+                authButtonsContainer.innerHTML = `
+                    <a href="../Đăng Nhập/index.html" class="bg-white text-guardian-orange font-bold px-4 py-2 rounded-full border border-guardian-orange hover:bg-gray-50 transition">Đăng nhập</a>
+                    <a href="../Đăng Ký/index.html" class="bg-guardian-orange text-white font-bold px-4 py-2 rounded-full shadow-md transition">Đăng ký</a>
+                    <button class="md:hidden text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                `;
+            }
+
+            function showLoggedInButtons(fullName) {
+                authButtonsContainer.innerHTML = `
+                    <span class="text-sm font-semibold text-gray-700 hidden md:block">Chào, ${fullName}!</span>
+                    <a href="../member/member.html" class="text-guardian-orange font-bold px-3 py-1 rounded-full text-xs" title="Trang thành viên">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    </a>
+                    <button id="logout-button" class="bg-gray-200 text-gray-700 font-bold px-4 py-2 rounded-full hover:bg-gray-300 transition">Đăng xuất</button>
+                `;
+
+                document.getElementById('logout-button')?.addEventListener('click', () => {
+                    localStorage.removeItem('token'); 
+                    window.location.reload(); 
+                });
+            }
+
+            // ----- SCRIPT 2: VOUCHER TĨNH -----
+            // Không thêm script tải voucher động theo yêu cầu của bạn.
+            // Các nút "MUA NGAY" sẽ chỉ là tĩnh và không gọi API.
+        });
+    </script>
+</body>
+</html>

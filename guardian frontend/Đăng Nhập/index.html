@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Guardian Vietnam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            padding-top: 104px;
+        }
+        .bg-guardian-orange {
+            background-color: #f07f24;
+        }
+        .text-guardian-orange {
+            color: #f07f24;
+        }
+        .border-guardian-orange {
+            border-color: #f07f24;
+        }
+         .text-guardian-green {
+            color: #00a850;
+        }
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        /* Cải tiến cho Tab Active */
+        .tab-active {
+            border-bottom-width: 3px !important;
+            color: #f07f24 !important;
+            border-color: #f07f24 !important;
+            font-weight: 700 !important;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'guardian-orange': '#f07f24',
+                        'guardian-green': '#00a850',
+                        'flash-red': '#dc2626',
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 right-0 z-50 shadow-md">
+        <div class="bg-gray-800 text-white text-xs font-medium py-1.5 px-4 flex justify-end">
+            <a href="../voucher/voucher.html" class="hover:text-guardian-orange transition">Voucher</a>
+            <span class="mx-3 text-gray-500">|</span>
+            <a href="../Về chúng tôi/index.html" class="hover:text-guardian-orange transition">Về chúng tôi</a>
+        </div>
+
+        <nav class="bg-white p-4 flex justify-between items-center h-20">
+            <div class="text-2xl font-black text-guardian-orange uppercase tracking-wider">
+                <span class="text-guardian-green">G</span>UARDIAN
+            </div>
+            
+            <div class="hidden md:flex space-x-8 text-sm font-semibold">
+                <a href="../Trang chủ/index.html" class="text-gray-600 hover:text-guardian-orange transition pb-1">Trang chủ</a>
+                <a href="../voucher/voucher.html" class="text-gray-600 hover:text-guardian-orange transition pb-1">Voucher</a>
+                <a href="../Về chúng tôi/index.html" class="text-gray-600 hover:text-guardian-orange transition pb-1">Về chúng tôi</a>
+            </div>
+
+            <div id="auth-buttons" class="flex items-center space-x-3 text-sm">
+                </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-8 py-8 flex justify-center items-center" style="min-height: calc(100vh - 104px - 100px);"> <div class="max-w-md w-full bg-white p-8 md:p-10 rounded-2xl shadow-2xl border border-gray-100">
+            
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Chào mừng trở lại!</h2>
+            
+            <div class="grid grid-cols-2 text-center mb-6 border-b border-gray-200">
+                <button id="tab-customer" class="py-3 text-sm font-semibold text-gray-500 border-b-2 border-transparent tab-active">
+                    KHÁCH HÀNG
+                </button>
+                <button id="tab-admin" class="py-3 text-sm font-semibold text-gray-500 border-b-2 border-transparent hover:text-gray-700">
+                    QUẢN TRỊ VIÊN (QTV)
+                </button>
+            </div>
+            
+            <form id="login-form" class="space-y-5">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" placeholder="Nhập email của bạn" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-guardian-orange focus:border-guardian-orange transition">
+                </div>
+                
+                <div>
+                    <div class="flex justify-between items-baseline">
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Mật khẩu</label>
+                        <a href="#" class="text-xs font-medium text-guardian-orange hover:underline transition">Quên mật khẩu?</a>
+                    </div>
+                    <div class="relative">
+                        <input type="password" id="password" placeholder="Nhập mật khẩu của bạn" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-guardian-orange focus:border-guardian-orange transition pr-12">
+                        <span id="toggle-password" class="password-toggle text-gray-500 hover:text-guardian-orange">
+                            <svg id="eye-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542 7z"/></svg>
+                            <svg id="eye-closed" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.875a10 10 0 01-7.125-7.125m10.25-1.25l-.875-.875M12 21c-4.477 0-8.268-2.943-9.542-7 1.274-4.057 5.065-7 9.542-7 1.348 0 2.651.27 3.844.809m4.156 3.191l.875.875M21 12c-1.274 4.057-5.065 7-9.542 7-1.348 0-2.651-.27-3.844-.809m-4.156-3.191l-.875-.875"/></svg>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-guardian-orange text-white font-bold px-10 py-3 rounded-full shadow-lg hover:bg-opacity-90 transition transform hover:scale-105">
+                        ĐĂNG NHẬP
+                    </button>
+                </div>
+
+                <div class="text-center pt-2">
+                    <p class="text-sm text-gray-600">
+                        Chưa có tài khoản?
+                        <a href="../Đăng Ký/index.html" class="text-guardian-green font-bold hover:underline transition">
+                            Đăng ký ngay
+                        </a>
+                    </p>
+                </div>
+            </form>
+            <div id="status-message" class="mt-4 text-center text-sm font-medium hidden"></div>
+        </div>
+        
+    </main>
+
+    <footer class="bg-white p-8 md:p-12 border-t border-gray-200">
+        </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Biến toàn cục để biết đang đăng nhập vai trò gì
+            let loginMode = 'customer'; // Mặc định là 'customer'
+
+            // ----- Script 1: Xử lý Tabs -----
+            const tabCustomer = document.getElementById('tab-customer');
+            const tabAdmin = document.getElementById('tab-admin');
+            
+            tabCustomer.addEventListener('click', () => {
+                loginMode = 'customer';
+                tabCustomer.classList.add('tab-active');
+                tabAdmin.classList.remove('tab-active');
+            });
+
+            tabAdmin.addEventListener('click', () => {
+                loginMode = 'admin';
+                tabAdmin.classList.add('tab-active');
+                tabCustomer.classList.remove('tab-active');
+            });
+
+
+            // ----- Script 2: Ẩn/hiện mật khẩu -----
+            const togglePassword = document.getElementById('toggle-password');
+            const passwordInput = document.getElementById('password');
+
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('click', function () {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    
+                    const eyeOpen = togglePassword.querySelector('#eye-open');
+                    const eyeClosed = togglePassword.querySelector('#eye-closed');
+                    
+                    if (type === 'text') {
+                        eyeOpen.classList.add('hidden');
+                        eyeClosed.classList.remove('hidden');
+                    } else {
+                        eyeOpen.classList.remove('hidden');
+                        eyeClosed.classList.add('hidden');
+                    }
+                });
+            }
+
+            // ----- Script 3: Xử lý form đăng nhập -----
+            const loginForm = document.getElementById('login-form');
+            const statusMessage = document.getElementById('status-message');
+
+            loginForm?.addEventListener('submit', async function(e) {
+                e.preventDefault(); 
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                statusMessage.classList.add('hidden');
+                statusMessage.textContent = '';
+                statusMessage.classList.remove('text-red-500', 'text-green-500');
+
+                try {
+                    // 1. Gọi API Đăng nhập
+                    const response = await fetch('http://localhost:5000/api/auth/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.msg || 'Email hoặc mật khẩu không đúng');
+                    }
+                    
+                    const token = data.token;
+
+                    // 2. Đăng nhập thành công, gọi API /me để kiểm tra vai trò
+                    const userResponse = await fetch('http://localhost:5000/api/user/me', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-auth-token': token // Gửi token vừa nhận
+                        }
+                    });
+                    
+                    const user = await userResponse.json();
+                    if (!userResponse.ok) throw new Error('Không thể lấy thông tin người dùng');
+
+                    // 3. Xử lý logic dựa trên vai trò
+                    if (loginMode === 'customer') {
+                        // === ĐĂNG NHẬP VAI TRÒ KHÁCH HÀNG ===
+                        handleCustomerLogin(token);
+                    } else {
+                        // === ĐĂNG NHẬP VAI TRÒ ADMIN ===
+                        if (user.isAdmin) {
+                            handleAdminLogin(token);
+                        } else {
+                            throw new Error('Tài khoản này không có quyền Admin.');
+                        }
+                    }
+
+                } catch (error) {
+                    // 4. Lỗi (Sai mật khẩu, Lỗi mạng...)
+                    console.error('Lỗi Đăng nhập:', error);
+                    statusMessage.textContent = error.message || 'Không thể kết nối đến máy chủ.';
+                    statusMessage.classList.remove('hidden');
+                    statusMessage.classList.add('text-red-500');
+                }
+            });
+
+            function handleCustomerLogin(token) {
+                statusMessage.textContent = 'Đăng nhập thành công! Đang chuyển hướng...';
+                statusMessage.classList.remove('hidden');
+                statusMessage.classList.add('text-green-500');
+                localStorage.setItem('token', token);
+                setTimeout(() => {
+                    window.location.href = '../member/member.html'; // Chuyển đến trang thành viên
+                }, 2000);
+            }
+            
+            function handleAdminLogin(token) {
+                statusMessage.textContent = 'Đăng nhập Admin thành công! Đang chuyển hướng...';
+                statusMessage.classList.remove('hidden');
+                statusMessage.classList.add('text-green-500');
+                localStorage.setItem('token', token); // Lưu token
+                setTimeout(() => {
+                    window.location.href = '../Đăng Nhập Admin/dashboard.html'; // Chuyển đến trang Dashboard Admin
+                }, 2000);
+            }
+
+
+            // ----- SCRIPT 4: KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP CHO HEADER -----
+            const authButtonsContainer = document.getElementById('auth-buttons');
+            const token = localStorage.getItem('token'); 
+
+            if (token) {
+                fetchUserInfo(token);
+            } else {
+                showLoggedOutButtons();
+            }
+
+            async function fetchUserInfo(token) {
+                try {
+                    const response = await fetch('http://localhost:5000/api/user/me', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-auth-token': token 
+                        }
+                    });
+
+                    if (response.ok) {
+                        const user = await response.json();
+                        showLoggedInButtons(user.full_name);
+                    } else {
+                        localStorage.removeItem('token'); 
+                        showLoggedOutButtons();
+                    }
+                } catch (error) {
+                    console.error('Lỗi kết nối:', error);
+                    showLoggedOutButtons(); 
+                }
+            }
+
+            function showLoggedOutButtons() {
+                // Trang này là 'Đăng Nhập', nên ta làm mờ nút 'Đăng Nhập'
+                authButtonsContainer.innerHTML = `
+                    <a href="#" class="bg-white text-guardian-orange font-bold px-4 py-2 rounded-full border border-guardian-orange opacity-70 cursor-not-allowed">Đăng nhập</a>
+                    <a href="../Đăng Ký/index.html" class="bg-guardian-orange text-white font-bold px-4 py-2 rounded-full shadow-md transition">Đăng ký</a>
+                `;
+            }
+
+            function showLoggedInButtons(fullName) {
+                // Nếu người dùng đã đăng nhập mà vẫn vào trang này, cứ hiển thị trạng thái
+                authButtonsContainer.innerHTML = `
+                    <span class="text-sm font-semibold text-gray-700 hidden md:block">Chào, ${fullName}!</span>
+                    <a href="../member/member.html" class="text-guardian-orange font-bold px-3 py-1 rounded-full text-xs" title="Trang thành viên">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    </a>
+                    <button id="logout-button" class="bg-gray-200 text-gray-700 font-bold px-4 py-2 rounded-full hover:bg-gray-300 transition">Đăng xuất</button>
+                `;
+
+                document.getElementById('logout-button')?.addEventListener('click', () => {
+                    localStorage.removeItem('token'); 
+                    window.location.reload(); 
+                });
+            }
+        });
+    </script>
+</body>
+</html>

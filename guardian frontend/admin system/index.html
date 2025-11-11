@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Hội Cam - Guardian Vietnam</title>
+    <!-- Tải Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Thiết lập font Inter */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            padding-top: 104px; /* Đảm bảo nội dung không bị che bởi Header cố định */
+        }
+
+        /* Định nghĩa màu cam chủ đạo của Guardian */
+        .bg-guardian-orange {
+            background-color: #f07f24;
+        }
+        .text-guardian-orange {
+            color: #f07f24;
+        }
+        .border-guardian-orange {
+            border-color: #f07f24;
+        }
+        .bg-guardian-green {
+            background-color: #00a850;
+        }
+        .text-guardian-green {
+            color: #00a850;
+        }
+        .bg-flash-red {
+            background-color: #dc2626;
+        }
+        .text-flash-red {
+            color: #dc2626;
+        }
+        /* Màu tím cho admin buttons */
+        .bg-admin-purple { background-color: #a78bfa; }
+        .bg-admin-dark-purple { background-color: #7c3aed; }
+        .hover\:bg-admin-purple:hover { background-color: #a78bfa; }
+
+
+        /* Styling cho phần Hero Banner với hình dạng đặc biệt */
+        .hero-shape {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 450px; 
+            height: 350px; 
+            background-color: #f07f24;
+            border-bottom-left-radius: 9999px; 
+            z-index: 1;
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                width: 300px;
+                height: 250px;
+                right: -50px;
+                top: -50px;
+            }
+        }
+        
+        .admin-table tr {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .admin-table tr:hover {
+            background-color: #f9fafb;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'guardian-orange': '#f07f24',
+                        'guardian-green': '#00a850',
+                        'flash-red': '#dc2626',
+                        'admin-purple': '#a78bfa', 
+                        'admin-dark-purple': '#7c3aed', 
+                    },
+                }
+            }
+        }
+        
+        // Script để mô phỏng đồng hồ đếm ngược
+        document.addEventListener('DOMContentLoaded', () => {
+            const timerElement = document.getElementById('flash-timer');
+            if (timerElement) {
+                let seconds = 3600 * 2; // Bắt đầu từ 02:00:00 
+
+                function updateTimer() {
+                    let remainingSeconds = seconds % (3600 * 24); 
+                    
+                    const h = String(Math.floor(remainingSeconds / 3600)).padStart(2, '0');
+                    const m = String(Math.floor((remainingSeconds % 3600) / 60)).padStart(2, '0');
+                    const s = String(remainingSeconds % 60).padStart(2, '0');
+                    
+                    // Tạo khối thời gian với style đen/trắng
+                    const timeBlock = (val) => `<span class="p-1.5 bg-black text-white rounded-md">${val}</span>`;
+
+                    timerElement.innerHTML = `
+                        <div class="flex space-x-1 items-center justify-center text-xs md:text-sm">
+                            <span class="text-flash-red mr-1">0H - 12H</span>
+                            ${timeBlock(h)}
+                            <span class="text-flash-red">:</span>
+                            ${timeBlock(m)}
+                            <span class="text-flash-red">:</span>
+                            ${timeBlock(s)}
+                            <span class="text-flash-red ml-1">12H - 24H</span>
+                        </div>
+                    `;
+                    
+                    if (seconds > 0) {
+                        seconds--;
+                    } else {
+                        clearInterval(timerInterval);
+                        timerElement.innerHTML = `<span class="text-flash-red font-bold">SALE ENDED</span>`;
+                    }
+                }
+
+                updateTimer();
+                const timerInterval = setInterval(updateTimer, 1000);
+            }
+        });
+    </script>
+</head>
+<body class="antialiased">
+
+    <!-- Header cố định -->
+    <header class="fixed top-0 left-0 right-0 z-50 shadow-md">
+        <!-- Top Info Bar -->
+        <div class="bg-gray-800 text-white text-xs font-medium py-1.5 px-4 flex justify-end">
+            <a href="#" class="hover:text-guardian-orange transition">Voucher</a>
+            <span class="mx-3 text-gray-500">|</span>
+            <a href="#" class="hover:text-guardian-orange transition">Về chúng tôi</a>
+        </div>
+
+        <!-- Main Navigation Bar -->
+        <nav class="bg-white p-4 flex justify-between items-center h-20">
+            <!-- Logo -->
+            <div class="text-2xl font-black text-guardian-orange uppercase tracking-wider">
+                <span class="text-guardian-green">G</span>UARDIAN
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="hidden md:flex space-x-8 text-sm font-semibold">
+                <a href="#" class="text-gray-600 hover:text-guardian-orange transition pb-1">Trang chủ</a>
+                <a href="#" class="text-gray-600 hover:text-guardian-orange transition pb-1">Voucher</a>
+                <a href="#" class="text-gray-600 hover:text-guardian-orange transition pb-1">Về chúng tôi</a>
+            </div>
+
+            <!-- Action Buttons (Dashboard Mode) -->
+            <div class="flex items-center space-x-3 text-sm">
+                <!-- Nút Đăng nhập/Đăng ký đã thay bằng nút Dashboard/Logout (Mô phỏng) -->
+                <a href="#" class="bg-white text-guardian-orange font-bold px-4 py-2 rounded-full border border-guardian-orange hover:bg-gray-50 transition">Dashboard</a>
+                <a href="#" class="bg-guardian-orange text-white font-bold px-4 py-2 rounded-full shadow-md transition">Log out</a>
+                <button class="md:hidden text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-8 py-8">
+
+        <!-- 1. Hero / Main Banner Section (Admin System) -->
+        <div class="relative bg-white rounded-2xl shadow-lg overflow-hidden mb-12 p-6 md:p-12">
+            
+        
+            <div class="hero-shape"></div>
+
+            <div class="relative z-10 grid md:grid-cols-2 gap-8 items-start">
+                <!-- Text Content & Flash Sale -->
+                <div class="pr-10">
+                    <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+                        Guardian - Tri ân
+                    </h1>
+                    
+                    <!-- Dải Flash Sale (BÍ KÍP SĂN DEAL) -->
+                    <div class="flex items-center space-x-4 mb-4">
+                        <p class="text-lg font-bold text-guardian-orange">BÍ KÍP SĂN DEAL</p>
+                        <div class="bg-flash-red text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg flex items-center space-x-2">
+                            <span>FLASH SALE</span>
+                            <div id="flash-timer" class="flex items-center text-sm font-extrabold space-x-1">
+                                <!-- Timer will be injected here by JS -->
+                                <div class="flex space-x-1 items-center justify-center text-xs md:text-sm">
+                                    <span class="text-flash-red mr-1">0H - 12H</span>
+                                    <span class="p-1.5 bg-black text-white rounded-md">02</span>
+                                    <span class="text-flash-red">:</span>
+                                    <span class="p-1.5 bg-black text-white rounded-md">00</span>
+                                    <span class="text-flash-red">:</span>
+                                    <span class="p-1.5 bg-black text-white rounded-md">00</span>
+                                    <span class="text-flash-red ml-1">12H - 24H</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-sm md:text-base text-gray-600 mb-6">
+                        Trao hạnh phúc, truyền cảm hứng sống khỏe, đẹp đến hàng triệu khách hàng Việt. Luôn là Guardian không ngừng hoàn thiện để mang đến trải nghiệm mua sắm đáng tin cậy, chất lượng cao, giá tốt và dịch vụ tuyệt vời. Bên cạnh đó, chúng tôi luôn có những chương trình đặc biệt tri ân dành cho Hội Cam Guardian (Đối tác G-Club), nơi những khách hàng thân thiết được tri ân đặc biệt.
+                    </p>
+                </div>
+
+                <!-- Banner Graphic -->
+                <div class="relative flex justify-center md:justify-end">
+                    <!-- Text "guardian healthy beauty" lớn trong hình dạng cam -->
+                    <div class="absolute right-0 top-1/2 -translate-y-1/2 text-right z-20">
+                        <p class="text-[3rem] md:text-[5rem] font-black text-white opacity-90 leading-none">guardian</p>
+                        <p class="text-xl md:text-3xl font-bold text-white opacity-90 mt-1">healthy beauty</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Admin System / Customer List Section -->
+        <div class="max-w-6xl mx-auto bg-white p-4 md:p-8 rounded-2xl shadow-2xl mb-12 border border-gray-100">
+            
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Tài khoản hội Cam</h2>
+                <!-- Tabs for Show 10 items / QTV -->
+                <div class="flex items-center text-sm font-semibold space-x-2">
+                    <div class="text-gray-600">Show </div>
+                    <select class="p-2 border border-gray-300 rounded-lg focus:ring-guardian-orange focus:border-guardian-orange transition">
+                        <option>10 items</option>
+                        <option>25 items</option>
+                        <option>50 items</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Filters and Search -->
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4 mb-6">
+                <!-- Dropdowns -->
+                <div class="flex flex-wrap space-x-3 text-sm">
+                    <select class="p-2 border border-gray-300 rounded-lg focus:ring-guardian-orange focus:border-guardian-orange transition">
+                        <option>From Newest</option>
+                        <option>From Oldest</option>
+                        <option>Alphabetical</option>
+                    </select>
+                    <select class="p-2 border border-gray-300 rounded-lg focus:ring-guardian-orange focus:border-guardian-orange transition">
+                        <option>Last Name</option>
+                        <option>First Name</option>
+                    </select>
+                </div>
+                
+                <!-- Search/Status Tabs -->
+                <div class="flex items-center text-sm font-semibold">
+                    <button class="bg-gray-100 text-gray-600 px-4 py-2 rounded-full hover:bg-gray-200 transition">Khách Hàng</button>
+                    <button class="bg-guardian-orange text-white px-4 py-2 rounded-full ml-2 shadow-md transition">QTV</button>
+                </div>
+            </div>
+
+            <!-- Customer List Table -->
+            <div class="overflow-x-auto shadow-md rounded-lg border border-gray-200">
+                <table class="min-w-full divide-y divide-gray-200 admin-table">
+                    <thead class="bg-gray-50 text-xs uppercase text-gray-700">
+                        <tr>
+                            <th scope="col" class="py-3 px-6 text-left">Tên Bác Sĩ</th>
+                            <th scope="col" class="py-3 px-6 text-left"></th>
+                            <th scope="col" class="py-3 px-6 text-left">Status</th>
+                            <th scope="col" class="py-3 px-6 text-right">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200 text-sm text-gray-800">
+                        <!-- Row 1 -->
+                        <tr>
+                            <td class="py-3 px-6 font-medium whitespace-nowrap">Dr. Lang</td>
+                            <td class="py-3 px-6 whitespace-nowrap"></td>
+                            <td class="py-3 px-6 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                    Rejected
+                                </span>
+                            </td>
+                            <td class="py-3 px-6 text-right whitespace-nowrap">
+                                <a href="#" class="text-guardian-orange hover:text-red-600 mr-4">Edit</a>
+                                <a href="#" class="text-guardian-green hover:text-green-600">View</a>
+                            </td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr>
+                            <td class="py-3 px-6 font-medium whitespace-nowrap">Dr. Kim Thu Thảo</td>
+                            <td class="py-3 px-6 whitespace-nowrap"></td>
+                            <td class="py-3 px-6 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-guardian-green">
+                                    Approved
+                                </span>
+                            </td>
+                            <td class="py-3 px-6 text-right whitespace-nowrap">
+                                <a href="#" class="text-guardian-orange hover:text-red-600 mr-4">Edit</a>
+                                <a href="#" class="text-guardian-green hover:text-green-600">View</a>
+                            </td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr>
+                            <td class="py-3 px-6 font-medium whitespace-nowrap">Dr. Anh Thư</td>
+                            <td class="py-3 px-6 whitespace-nowrap"></td>
+                            <td class="py-3 px-6 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                    Pending
+                                </span>
+                            </td>
+                            <td class="py-3 px-6 text-right whitespace-nowrap">
+                                <a href="#" class="text-guardian-orange hover:text-red-600 mr-4">Edit</a>
+                                <a href="#" class="text-guardian-green hover:text-green-600">View</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex items-center justify-center space-x-2 mt-6">
+                <button class="p-2 border border-gray-300 rounded-lg text-gray-500 hover:bg-gray-100 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <span class="px-3 py-1 bg-guardian-orange text-white rounded-lg font-bold">1</span>
+                <span class="px-3 py-1 text-gray-700 hover:bg-gray-100 rounded-lg cursor-pointer">2</span>
+                <span class="px-3 py-1 text-gray-700 hover:bg-gray-100 rounded-lg cursor-pointer">3</span>
+                <span class="text-gray-500">...</span>
+                <span class="px-3 py-1 text-gray-700 hover:bg-gray-100 rounded-lg cursor-pointer">12</span>
+                <button class="p-2 border border-gray-300 rounded-lg text-gray-500 hover:bg-gray-100 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+            
+            <!-- Admin Actions Buttons -->
+            <div class="flex justify-center space-x-4 mt-12">
+                <button class="bg-admin-dark-purple text-white font-bold px-8 py-3 rounded-full shadow-lg hover:bg-admin-purple transition transform hover:scale-105">
+                    new appointment
+                </button>
+                <button class="bg-admin-dark-purple text-white font-bold px-8 py-3 rounded-full shadow-lg hover:bg-admin-purple transition transform hover:scale-105">
+                    Register
+                </button>
+                <button class="bg-admin-dark-purple text-white font-bold px-8 py-3 rounded-full shadow-lg hover:bg-admin-purple transition transform hover:scale-105">
+                    re-examination
+                </button>
+            </div>
+
+        </div>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white p-8 md:p-12 border-t border-gray-200">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <!-- Column 1: Logo & Slogan -->
+            <div>
+                <div class="text-xl font-black text-guardian-orange uppercase tracking-wider mb-3">
+                    <span class="text-guardian-green">G</span>UARDIAN
+                </div>
+                <p class="text-sm text-gray-600">
+                    Sức Khỏe & Sắc Đẹp Chính Hãng
+                </p>
+            </div>
+
+            <!-- Column 2: Giờ Hoạt Động (Operating Hours) -->
+            <div class="md:col-span-2">
+                <h3 class="text-lg font-bold text-gray-800 mb-3">Giờ Hoạt Động</h3>
+                <ul class="text-sm text-gray-600 space-y-1">
+                    <li><span class="font-semibold w-24 inline-block">Thứ Hai:</span> 9:00 - 18:00</li>
+                    <li><span class="font-semibold w-24 inline-block">Thứ Ba:</span> 9:00 - 18:00</li>
+                    <li><span class="font-semibold w-24 inline-block">Thứ Tư:</span> 9:00 - 18:00</li>
+                    <li><span class="font-semibold w-24 inline-block">Thứ Năm:</span> 9:00 - 18:00</li>
+                    <li><span class="font-semibold w-24 inline-block">Thứ Sáu:</span> 9:00 - 18:00</li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Liên Hệ (Contact) -->
+            <div>
+                <h3 class="text-lg font-bold text-gray-800 mb-3">Liên Hệ</h3>
+                <ul class="text-sm text-gray-600 space-y-2">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 mr-2 mt-1 text-guardian-orange flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        <p>Hotline: 028 3636 9272</p>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 mr-2 mt-1 text-guardian-orange flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <p>Email: guardianvn@email.com</p>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 mr-2 mt-1 text-guardian-orange flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <p>Việt Nam</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-gray-100 text-center text-xs text-gray-500">
+            &copy; 2025 Guardian Vietnam. Bảo lưu mọi quyền.
+        </div>
+    </footer>
+
+</body>
+</html>

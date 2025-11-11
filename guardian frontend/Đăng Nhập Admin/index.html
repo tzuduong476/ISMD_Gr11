@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập Admin - Guardian Vietnam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            padding-top: 104px; 
+        }
+        .bg-guardian-orange {
+            background-color: #f07f24;
+        }
+        .text-guardian-orange {
+            color: #f07f24;
+        }
+        .border-guardian-orange {
+            border-color: #f07f24;
+        }
+         .text-guardian-green {
+            color: #00a850;
+        }
+        .hero-shape {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 450px; 
+            height: 350px; 
+            background-color: #f07f24;
+            border-bottom-left-radius: 9999px; 
+            z-index: 1;
+            @media (max-width: 768px) {
+                width: 300px;
+                height: 250px;
+                right: -50px;
+                top: -50px;
+            }
+        }
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'guardian-orange': '#f07f24',
+                        'guardian-green': '#00a850',
+                        'flash-red': '#dc2626',
+                        'register-pink': '#ffe8e2', 
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 right-0 z-50 shadow-md">
+        <div class="bg-gray-800 text-white text-xs font-medium py-1.5 px-4 flex justify-end">
+            <a href="../voucher/voucher.html" class="hover:text-guardian-orange transition">Voucher</a>
+            <span class="mx-3 text-gray-500">|</span>
+            <a href="../Về chúng tôi/index.html" class="hover:text-guardian-orange transition">Về chúng tôi</a>
+        </div>
+
+        <nav class="bg-white p-4 flex justify-between items-center h-20">
+            <div class="text-2xl font-black text-guardian-orange uppercase tracking-wider">
+                <span class="text-guardian-green">G</span>UARDIAN
+            </div>
+            
+            <div class="hidden md:flex space-x-8 text-sm font-semibold">
+                <a href="../Trang chủ/index.html" class="text-gray-600 hover:text-guardian-orange transition pb-1">Trang chủ</a>
+                <a href="../voucher/voucher.html" class="text-gray-600 hover:text-guardian-orange transition pb-1">Voucher</a>
+                <a href="../Về chúng tôi/index.html" class="text-gray-600 hover:text-guardian-orange transition pb-1">Về chúng tôi</a>
+            </div>
+
+            <div id="auth-buttons" class="flex items-center space-x-3 text-sm">
+                <a href="../Đăng Nhập/index.html" class="bg-gray-100 text-gray-600 px-4 py-2 rounded-full hover:bg-gray-200 transition">Khách Hàng</a>
+                <a href="#" class="bg-guardian-orange text-white font-bold px-4 py-2 rounded-full shadow-md transition opacity-70 cursor-not-allowed">QTV</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-8 py-8 flex justify-center items-center" style="min-height: calc(100vh - 104px - 100px);">
+
+        <div class="max-w-md w-full bg-white p-8 md:p-12 rounded-2xl shadow-2xl border border-gray-100">
+            
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 uppercase tracking-wider">
+                    Đăng nhập Admin
+                </h2>
+                <div class="flex items-center text-sm font-semibold">
+                    <a href="../Đăng Nhập/index.html" class="bg-gray-100 text-gray-600 px-4 py-2 rounded-full hover:bg-gray-200 transition">Khách Hàng</a>
+                    <button class="bg-guardian-orange text-white px-4 py-2 rounded-full ml-2 shadow-md transition cursor-not-allowed">QTV</button>
+                </div>
+            </div>
+            
+            <form id="admin-login-form" class="space-y-6">
+                <input type="email" id="email-admin" placeholder="Email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-guardian-orange focus:border-guardian-orange transition">
+                
+                <div class="relative">
+                    <input type="password" id="password-admin" placeholder="Mật khẩu" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-guardian-orange focus:border-guardian-orange transition pr-12">
+                    <span id="toggle-password-admin" class="password-toggle text-gray-500 hover:text-guardian-orange">
+                        <div>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.875a10 10 0 01-7.125-7.125m10.25-1.25l-.875-.875M12 21c-4.477 0-8.268-2.943-9.542-7 1.274-4.057 5.065-7 9.542-7 1.348 0 2.651.27 3.844.809m4.156 3.191l.875.875M21 12c-1.274 4.057-5.065 7-9.542 7-1.348 0-2.651-.27-3.844-.809m-4.156-3.191l-.875-.875"/></svg>
+                        </div>
+                    </span>
+                </div>
+
+                <div class="flex flex-col space-y-4 pt-4">
+                    <button type="submit" class="bg-guardian-orange text-white font-bold px-10 py-3 rounded-full shadow-lg hover:bg-opacity-90 transition transform hover:scale-105">
+                        Đăng nhập
+                    </button>
+                </div>
+            </form>
+            <div id="status-message" class="mt-4 text-center text-sm font-medium hidden"></div>
+
+        </div>
+        
+    </main>
+
+    <footer class="bg-white p-8 md:p-12 border-t border-gray-200">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <div>
+                <div class="text-xl font-black text-guardian-orange uppercase tracking-wider mb-3">
+                    <span class="text-guardian-green">G</span>UARDIAN
+                </div>
+                <p class="text-sm text-gray-600">
+                    Sức Khỏe & Sắc Đẹp Chính Hãng
+                </p>
+                <div class="mt-4 flex space-x-3">
+                    <a href="#" class="text-gray-400 hover:text-guardian-orange transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.77l-.443 2.89h-2.327v6.987C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-guardian-orange transition">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm-.2 2.75a.75.75 0 100 1.5.75.75 0 000-1.5zm8.9 14.5c.34 0 .6-.26.6-.6v-8.4c0-.34-.26-.6-.6-.6h-8.4c-.34 0-.6.26-.6.6v8.4c0 .34.26.6.6.6h8.4zM12 9a3 3 0 100 6 3 3 0 000-6zm0 1a2 2 0 110 4 2 2 0 010-4z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-gray-800 mb-3">Giờ Hoạt Động</h3>
+                <ul class="text-sm text-gray-600 space-y-1">
+                    <li><span class="font-semibold w-24 inline-block">Thứ Hai:</span> 9:30 - 18:00</li>
+                    <li><span class="font-semibold w-24 inline-block">Thứ Ba:</span> 9:30 - 18:00</li>
+                    <li><span class="font-semibold w-24 inline-block">Thứ Tư:</span> 9:30 - 18:00</li>
+                    <li><span class="font-semibold w-24 inline-block">Thứ Năm:</span> 9:30 - 18:00</li>
+                    <li><span class="font-semibold w-24 inline-block">Thứ Sáu:</span> 9:30 - 18:00</li>
+                    <li><span class="font-semibold w-24 inline-block">Thứ Bảy:</span> 9:30 - 18:00</li>
+                    <li><span class="font-semibold w-24 inline-block">Chủ Nhật:</span> Đóng cửa</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-gray-800 mb-3">Thông Tin</h3>
+                <ul class="text-sm text-gray-600 space-y-1">
+                    <li><a href="#" class="hover:text-guardian-orange transition">Chính sách bảo mật</a></li>
+                    <li><a href="#" class="hover:text-guardian-orange transition">Điều khoản sử dụng</a></li>
+                    <li><a href="#" class="hover:text-guardian-orange transition">Chính sách giao hàng</a></li>
+                    <li><a href="#" class="hover:text-guardian-orange transition">Quy chế hoạt động</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-gray-800 mb-3">Liên Hệ</h3>
+                <ul class="text-sm text-gray-600 space-y-2">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 mr-2 mt-1 text-guardian-orange flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        <p>Hotline: 028 3636 9272</p>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 mr-2 mt-1 text-guardian-orange flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <p>Email: guardianvn@email.com</p>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 mr-2 mt-1 text-guardian-orange flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <p>Việt Nam</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-8 pt-6 border-t border-gray-100 text-center text-xs text-gray-500">
+            &copy; 2025 Guardian Vietnam. Bảo lưu mọi quyền.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // ----- Script ẩn/hiện mật khẩu  -----
+            function setupPasswordToggle(inputId, toggleId) {
+                const toggle = document.getElementById(toggleId);
+                const input = document.getElementById(inputId);
+                
+                if (toggle && input) {
+                    toggle.addEventListener('click', function () {
+                        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                        input.setAttribute('type', type);
+                        
+                        const iconContainer = toggle.querySelector('div');
+                        const isText = type === 'text';
+                        
+                        iconContainer.innerHTML = isText 
+                            ? `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542 7z"/></svg>`
+                            : `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.875a10 10 0 01-7.125-7.125m10.25-1.25l-.875-.875M12 21c-4.477 0-8.268-2.943-9.542-7 1.274-4.057 5.065-7 9.542-7 1.348 0 2.651.27 3.844.809m4.156 3.191l.875.875M21 12c-1.274 4.057-5.065 7-9.542 7-1.348 0-2.651-.27-3.844-.809m-4.156-3.191l-.875-.875"/></svg>`;
+                    });
+                }
+            }
+            setupPasswordToggle('password-admin', 'toggle-password-admin');
+
+            // ----- Script xử lý form đăng nhập Admin (API THẬT) -----
+            const loginForm = document.getElementById('admin-login-form');
+            const statusMessage = document.getElementById('status-message');
+
+            loginForm?.addEventListener('submit', async function(e) {
+                e.preventDefault(); 
+                
+                const email = document.getElementById('email-admin').value;
+                const password = document.getElementById('password-admin').value;
+
+                statusMessage.classList.add('hidden');
+                statusMessage.textContent = '';
+                statusMessage.classList.remove('text-red-500', 'text-green-500');
+
+                try {
+                    // 1. Gọi API Đăng nhập
+                    const loginResponse = await fetch('http://localhost:5000/api/auth/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    const loginData = await loginResponse.json();
+
+                    if (!loginResponse.ok) {
+                        // Lỗi (ví dụ: Sai mật khẩu)
+                        throw new Error(loginData.msg || 'Email hoặc mật khẩu không đúng');
+                    }
+                    
+                    const token = loginData.token;
+
+                    // 2. Gọi API /me để kiểm tra quyền Admin
+                    const userResponse = await fetch('http://localhost:5000/api/user/me', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-auth-token': token // Gửi token vừa nhận
+                        }
+                    });
+                    
+                    const user = await userResponse.json();
+
+                    if (!userResponse.ok) {
+                        throw new Error('Không thể lấy thông tin người dùng');
+                    }
+
+                    // 3. KIỂM TRA QUYỀN ADMIN (Logic chuyển hướng)
+                    if (user.isAdmin) {
+                        // LÀ ADMIN
+                        statusMessage.textContent = 'Đăng nhập Admin thành công! Đang chuyển hướng...';
+                        statusMessage.classList.remove('hidden');
+                        statusMessage.classList.add('text-green-500');
+
+                        localStorage.setItem('token', token); // Lưu token
+                        
+                        // **** LỆNH CHUYỂN HƯỚNG THẬT ****
+                        setTimeout(() => {
+                            window.location.href = 'dashboard.html'; // Chuyển đến trang Dashboard
+                        }, 100); // Chuyển hướng nhanh
+
+                    } else {
+                        // KHÔNG PHẢI ADMIN
+                        throw new Error('Tài khoản này không có quyền Admin.');
+                    }
+
+                } catch (error) {
+                    // 4. Lỗi
+                    console.error('Lỗi Đăng nhập Admin:', error);
+                    statusMessage.textContent = error.message || 'Không thể kết nối đến máy chủ.';
+                    statusMessage.classList.remove('hidden');
+                    statusMessage.classList.add('text-red-500');
+                }
+            });
+            
+            // ----- Script xử lý Header -----
+            const authButtonsContainer = document.getElementById('auth-buttons');
+             authButtonsContainer.innerHTML = `
+                <a href="../Đăng Nhập/index.html" class="bg-gray-100 text-gray-600 px-4 py-2 rounded-full hover:bg-gray-200 transition">Khách Hàng</a>
+                <a href="#" class="bg-guardian-orange text-white font-bold px-4 py-2 rounded-full shadow-md transition opacity-70 cursor-not-allowed">QTV</a>
+            `;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Guardian Vietnam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            padding-top: 104px; 
+        }
+        .bg-guardian-orange {
+            background-color: #f07f24;
+        }
+        .text-guardian-orange {
+            color: #f07f24;
+        }
+        .border-guardian-orange {
+            border-color: #f07f24;
+        }
+         .text-guardian-green {
+            color: #00a850;
+        }
+        .dashboard-card {
+            border-top: 5px solid #f07f24;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'guardian-orange': '#f07f24',
+                        'guardian-green': '#00a850',
+                        'flash-red': '#dc2626',
+                        'register-pink': '#ffe8e2', 
+                    },
+                }
+            }
+        }
+        const formatCurrency = (number) => {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+        }
+    </script>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 right-0 z-50 shadow-md">
+        <div class="bg-gray-800 text-white text-xs font-medium py-1.5 px-4 flex justify-end">
+            <a href="../voucher/voucher.html" class="hover:text-guardian-orange transition">Voucher</a>
+            <span class="mx-3 text-gray-500">|</span>
+            <a href="../Về chúng tôi/index.html" class="hover:text-guardian-orange transition">Về chúng tôi</a>
+        </div>
+        <nav class="bg-white p-4 flex justify-between items-center h-20">
+            <div class="text-2xl font-black text-guardian-orange uppercase tracking-wider">
+                <span class="text-guardian-green">G</span>UARDIAN (ADMIN)
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-semibold">
+                <a href="../Trang chủ/index.html" class="text-gray-600 hover:text-guardian-orange transition pb-1">Về Trang Chủ</a>
+                <a href="#" class="text-guardian-orange border-b-2 border-guardian-orange pb-1">Dashboard</a>
+            </div>
+            <div id="auth-buttons" class="flex items-center space-x-3 text-sm">
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-8 py-8">
+
+        <div class="bg-guardian-orange text-white p-8 rounded-2xl shadow-xl mb-8 flex justify-between items-center">
+             <div>
+                <h1 id="admin-welcome-text" class="text-3xl md:text-4xl font-extrabold mb-1">
+                    Chào mừng, Quản trị viên!
+                </h1>
+                <p class="text-sm opacity-90">Quản lý Chương trình Tích điểm Khách hàng Thân thiết (Hội Cam Guardian).</p>
+            </div>
+            <svg class="w-12 h-12 opacity-80" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <div class="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100 dashboard-card border-t-guardian-green">
+                <h2 class="text-2xl font-bold text-guardian-green mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3 1.343 3 3v2c0 1.657-1.343 3-3 3s-3-1.343-3-3v-2c0-1.657 1.343-3 3-3z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 16l-3 3h12l-3-3m-6 0v-2c0-1.657 1.343-3 3-3s3 1.343 3 3v2m-6 0h6m-6 0a3 3 0 00-3-3v-2a3 3 0 016 0v2a3 3 0 00-3 3zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Ghi Nhận Giao Dịch
+                </h2>
+                <p class="text-sm text-gray-600 mb-4">Nhập thông tin mua hàng để kích hoạt hệ thống Tích điểm và xét Thăng hạng tự động.</p>
+                <form id="transaction-form" class="space-y-4">
+                    <div>
+                        <label for="user-email" class="block text-sm font-medium text-gray-700 mb-1">Email Khách Hàng</label>
+                        <input type="email" id="user-email" placeholder="Nhập email khách hàng (ví dụ: user@gmail.com)" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-guardian-orange focus:border-guardian-orange transition">
+                    </div>
+                    <div>
+                        <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">Số Tiền Giao Dịch (VNĐ)</label>
+                        <input type="number" id="amount" placeholder="Nhập số tiền (ví dụ: 500000)" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-guardian-orange focus:border-guardian-orange transition">
+                    </div>
+                    
+                    <div class="pt-2">
+                        <button type="submit" class="w-full bg-guardian-green text-white font-bold px-10 py-3 rounded-full shadow-lg hover:bg-opacity-90 transition transform hover:scale-105">
+                            Cộng Điểm & Cập Nhật Hạng
+                        </button>
+                    </div>
+                </form>
+                <div id="transaction-status" class="mt-4 text-center text-sm font-medium hidden"></div>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100 dashboard-card border-t-guardian-orange">
+                <h2 class="text-2xl font-bold text-guardian-orange mb-6 flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                    Tạo Voucher Khuyến Mãi
+                </h2>
+                <p class="text-sm text-gray-600 mb-4">Thêm voucher mới vào kho hệ thống. Khách hàng có thể tìm thấy chúng ở trang Voucher.</p>
+                <form id="voucher-form" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="code" class="block text-sm font-medium text-gray-700 mb-1">Mã Code</label>
+                            <input type="text" id="code" placeholder="vd: SALE50K" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                         <div>
+                            <label for="brand" class="block text-sm font-medium text-gray-700 mb-1">Thương Hiệu</label>
+                            <input type="text" id="brand" placeholder="vd: L'Oréal (để trống = Guardian)" class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Mô Tả</label>
+                        <input type="text" id="description" placeholder="vd: Giảm 50K cho đơn từ 500K" required class="w-full p-3 border border-gray-300 rounded-lg">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="discount_type" class="block text-sm font-medium text-gray-700 mb-1">Loại Giảm</label>
+                            <select id="discount_type" required class="w-full p-3 border border-gray-300 rounded-lg">
+                                <option value="fixed_amount">Số Tiền Cố Định (VNĐ)</option>
+                                <option value="percentage">Phần Trăm (%)</option>
+                            </select>
+                        </div>
+                         <div>
+                            <label for="discount_value" class="block text-sm font-medium text-gray-700 mb-1">Giá Trị Giảm</label>
+                            <input type="number" id="discount_value" placeholder="vd: 50000 (cho 50K) hoặc 10 (cho 10%)" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                    </div>
+
+                     <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="min_spend" class="block text-sm font-medium text-gray-700 mb-1">Chi Tiêu Tối Thiểu</label>
+                            <input type="number" id="min_spend" placeholder="vd: 500000" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                         <div>
+                            <label for="expires_at" class="block text-sm font-medium text-gray-700 mb-1">Ngày Hết Hạn</label>
+                            <input type="date" id="expires_at" required class="w-full p-3 border border-gray-300 rounded-lg">
+                        </div>
+                    </div>
+                    
+                    <div class="pt-2">
+                        <button type="submit" class="w-full bg-guardian-orange text-white font-bold px-10 py-3 rounded-full shadow-lg hover:bg-opacity-90 transition transform hover:scale-105">
+                            Tạo Voucher
+                        </button>
+                    </div>
+                </form>
+                 <div id="voucher-status" class="mt-4 text-center text-sm font-medium hidden"></div>
+            </div>
+
+        </div>
+        
+    </main>
+
+    <footer class="bg-white p-8 md:p-12 border-t border-gray-200 mt-12">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+        </div>
+        <div class="mt-8 pt-6 border-t border-gray-100 text-center text-xs text-gray-500">
+            &copy; 2025 Guardian Vietnam. Bảo lưu mọi quyền.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            const authButtonsContainer = document.getElementById('auth-buttons');
+            
+            // ✅ DEBUG LOG
+            console.log('Token:', token);
+            
+            if (!token) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            checkAdminStatus(token);
+
+            async function checkAdminStatus(token) {
+                try {
+                    const response = await fetch('http://localhost:5000/api/user/me', {
+                        headers: { 'x-auth-token': token }
+                    });
+                    const user = await response.json();
+                    
+                    // ✅ DEBUG LOG
+                    console.log('User data:', user);
+                    console.log('isAdmin:', user.isAdmin);
+                    console.log('Response OK:', response.ok);
+
+                    if (!response.ok || !user.isAdmin) {
+                        localStorage.removeItem('token');
+                        alert('Bạn không có quyền truy cập Admin.');
+                        window.location.href = 'index.html';
+                        return;
+                    }
+                    
+                    showLoggedInAdmin(user.full_name);
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    localStorage.removeItem('token');
+                    window.location.href = 'index.html';
+                }
+            }
+
+            function showLoggedInAdmin(fullName) {
+                 document.getElementById('admin-welcome-text').textContent = `Chào mừng, Admin ${fullName}!`;
+
+                 authButtonsContainer.innerHTML = `
+                    <span class="text-sm font-semibold text-gray-700 hidden md:block">Admin: ${fullName}</span>
+                    <button id="logout-button" class="bg-gray-200 text-gray-700 font-bold px-4 py-2 rounded-full hover:bg-gray-300 transition">Đăng xuất</button>
+                `;
+                document.getElementById('logout-button')?.addEventListener('click', () => {
+                    localStorage.removeItem('token'); 
+                    window.location.href = 'index.html';
+                });
+            }
+
+            // ----- XỬ LÝ FORM CỘNG ĐIỂM -----
+            const transactionForm = document.getElementById('transaction-form');
+            const transactionStatus = document.getElementById('transaction-status');
+
+            transactionForm?.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const userEmail = document.getElementById('user-email').value;
+                const amount = parseInt(document.getElementById('amount').value);
+                
+                transactionStatus.classList.add('hidden');
+                transactionStatus.classList.remove('text-red-500', 'text-green-500');
+
+                if (isNaN(amount) || amount <= 0) {
+                     transactionStatus.textContent = 'Lỗi: Số tiền giao dịch phải là số dương.';
+                     transactionStatus.classList.remove('hidden');
+                     transactionStatus.classList.add('text-red-500');
+                     return;
+                }
+                
+                transactionStatus.textContent = `Thành công (Demo)! Dữ liệu đã được ghi nhận. Hệ thống sẽ tự động cập nhật hạng cho user [${userEmail}] khi user đó đăng nhập lại.`;
+                transactionStatus.classList.remove('hidden');
+                transactionStatus.classList.add('text-green-500');
+            });
+
+            // ----- XỬ LÝ FORM TẠO VOUCHER -----
+            const voucherForm = document.getElementById('voucher-form');
+            const voucherStatus = document.getElementById('voucher-status');
+            
+            voucherForm?.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const voucherData = {
+                    code: document.getElementById('code').value,
+                    brand: document.getElementById('brand').value || 'Guardian',
+                    description: document.getElementById('description').value,
+                    discount_type: document.getElementById('discount_type').value,
+                    discount_value: parseInt(document.getElementById('discount_value').value),
+                    min_spend: parseInt(document.getElementById('min_spend').value),
+                    expires_at: document.getElementById('expires_at').value,
+                };
+                
+                if (isNaN(voucherData.discount_value) || isNaN(voucherData.min_spend) || voucherData.expires_at === '') {
+                     voucherStatus.textContent = 'Lỗi: Vui lòng điền đầy đủ và chính xác các trường số.';
+                     voucherStatus.classList.remove('hidden');
+                     voucherStatus.classList.add('text-red-500');
+                     return;
+                }
+
+                voucherStatus.classList.add('hidden');
+                voucherStatus.classList.remove('text-red-500', 'text-green-500');
+
+                try {
+                    const response = await fetch('http://localhost:5000/api/vouchers', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-auth-token': token
+                        },
+                        body: JSON.stringify(voucherData)
+                    });
+                    
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.msg || 'Không thể tạo voucher');
+                    }
+                    
+                    voucherStatus.textContent = `Tạo voucher [${voucherData.code}] thành công!`;
+                    voucherStatus.classList.remove('hidden');
+                    voucherStatus.classList.add('text-green-500');
+                    voucherForm.reset();
+
+                } catch (error) {
+                    voucherStatus.textContent = 'Lỗi: ' + error.message;
+                    voucherStatus.classList.remove('hidden');
+                    voucherStatus.classList.add('text-red-500');
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
